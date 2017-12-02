@@ -12,6 +12,7 @@ public class TimingLevel extends Level {
     public TimingLevel(OrthographicCamera c){
         super(c);
         beats = new ArrayList<TimingBeat>();
+        createBeat();
     }
 
     public void render(float delta){
@@ -21,7 +22,7 @@ public class TimingLevel extends Level {
         for(int i = beats.size()-1; i >= 0; i--){
             TimingBeat b = beats.get(i);
             if(!b.getActive()){
-                beats.remove(b);
+                destroyBeat(b);
             }
         }
     }
@@ -39,6 +40,13 @@ public class TimingLevel extends Level {
     }
 
     void createBeat(){
+        TimingBeat b = new TimingBeat(this);
+        stage.addActor(b);
+        beats.add(b);
+    }
 
+    void destroyBeat(TimingBeat b){
+        b.remove();
+        beats.remove(b);
     }
 }

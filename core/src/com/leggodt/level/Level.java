@@ -34,7 +34,6 @@ public abstract class Level {
         stage.draw();
     }
 
-
     public void setActive(boolean active) {
         this.active = active;
     }
