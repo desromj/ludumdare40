@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.leggodt.physics.LavaLamp;
 import com.leggodt.physics.Stand;
+import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -20,7 +21,7 @@ public class BalanceLevel extends Level {
     Stand stand;
 
     Vector2 stand_vel;
-    float cumulative;
+    Clock clock;
 
     Box2DDebugRenderer debugRenderer;
 
@@ -34,7 +35,7 @@ public class BalanceLevel extends Level {
 
     public void initObjects() {
         stand_vel = new Vector2();
-        cumulative = 0f;
+        clock = new Clock(true);
 
         world = new World(Constants.GRAVITY, true);
 
@@ -52,6 +53,7 @@ public class BalanceLevel extends Level {
     public void render(float delta) {
         super.render(delta);
 
+        clock.tick();
         moveStand(delta);
         handleInput();
 
@@ -72,8 +74,7 @@ public class BalanceLevel extends Level {
 
 
     public void moveStand(float delta) {
-        cumulative += delta;
-        stand_vel.set(0.5f * MathUtils.sin(cumulative * 2f), 0f);
+        stand_vel.set(0.5f * MathUtils.sin(clock.getTimeSeconds() * 2f), 0f);
         stand.getBody().setLinearVelocity(stand_vel);
     }
 
