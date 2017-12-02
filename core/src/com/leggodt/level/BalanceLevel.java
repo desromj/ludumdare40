@@ -39,7 +39,7 @@ public class BalanceLevel extends Level {
 
         world = new World(Constants.GRAVITY, true);
 
-        lamp = new LavaLamp(120, 60, 40, 160, world);
+        lamp = new LavaLamp(120, 60, 60, 180, world);
         stand = new Stand(90, -60, 100, 120, world);
 
         stage.addActor(lamp);
