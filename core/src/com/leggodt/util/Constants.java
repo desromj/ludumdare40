@@ -25,10 +25,16 @@ public class Constants {
     public static final float SEQUENCE_BUTTON_TIME = 5f;
     public static final float SEQUENCE_CREATE_TIME = 1.5f;
 
+    public static final float DODGE_BARRIER_SPEED = 40; //per second
+    public static final float DODGE_CREATION_TIME = 4;
+    public static final float DODGE_MOVE_SPEED = 70;
+
     public static final Sprite
         sprite1px = new Sprite(new Texture(("graphics/1px.png"))),
         spriteRing = new Sprite(new Texture("graphics/circleSprite.png")),
         spriteC = new Sprite(new Texture("graphics/spriteC.png")),
-        spriteX = new Sprite(new Texture("graphics/spriteX.png"));
+        spriteX = new Sprite(new Texture("graphics/spriteX.png")),
+
+        spritePlane = new Sprite(new Texture("graphics/badPlane.png"));
 
 }
