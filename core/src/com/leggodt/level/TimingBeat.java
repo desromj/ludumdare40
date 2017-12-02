@@ -2,6 +2,8 @@ package com.leggodt.level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.leggodt.util.Constants;
@@ -15,7 +17,7 @@ public class TimingBeat extends Actor {
     boolean isCorrect;
     boolean hasBeenHit;
 
-    TimingLevel level;
+    static TimingLevel level;
 
     public TimingBeat(TimingLevel level) {
         super();
@@ -49,8 +51,12 @@ public class TimingBeat extends Actor {
         }
     }
 
-    public void draw(){
-
+    public void draw(Batch b, float parentalpha){
+        b.draw(
+                Constants.spriteRing,
+                0,
+                0
+        );
     }
 
     public boolean getActive(){
