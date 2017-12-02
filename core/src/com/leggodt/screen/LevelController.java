@@ -13,7 +13,8 @@ public class LevelController {
             l.resize(sizes[N][i][0]*Constants.WORLD_WIDTH, sizes[N][i][1]*Constants.WORLD_HEIGHT);
         }
     }
-    //[amount of levels] [level index] [dimension (x, y, w, h)]
+
+    //[amount of levels] [level index] [dimension (x, y)]
     private static float[][][] positions = {
             {{0, 0}, {0, 0},    {0, 0},         {0, 0}},
             {{0, 0}, {0.5f, 0}, {0, 0},         {0, 0}},

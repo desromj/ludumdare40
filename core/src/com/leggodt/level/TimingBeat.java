@@ -31,7 +31,7 @@ public class TimingBeat extends Actor {
         isActive = clock.getTimeSeconds() < targetValue + Constants.TIMING_MARGIN;
     }
 
-    public void draw(Batch b, float parentalpha){
+    public void draw(Batch b, float parentAlpha){
         b.draw(
                 Constants.spriteRing,
                 0,
