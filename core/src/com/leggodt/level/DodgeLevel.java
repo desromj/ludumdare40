@@ -31,6 +31,9 @@ public class DodgeLevel extends Level {
 
     public void render(float delta){
         super.render(delta);
+        if(!active){
+            return;
+        }
         clock.tick();
 
         handleInput();
