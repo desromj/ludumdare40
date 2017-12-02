@@ -1,10 +1,13 @@
 package com.leggodt.level;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.leggodt.util.Constants;
 
@@ -33,8 +36,18 @@ public abstract class Level {
 
         stage.act(delta);
         stage.getViewport().apply();
-        Gdx.gl.glClearColor(bgc[0], bgc[1], bgc[2], 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getBatch().begin();
+        stage.getBatch().setColor(bgc[0], bgc[1], bgc[2], bgc[3]);
+        stage.getBatch().draw(
+                Constants.sprite1px,
+                0,
+                0,
+                stage.getViewport().getScreenWidth(),
+                stage.getViewport().getScreenHeight()
+        );
+        stage.getBatch().setColor(Color.WHITE);
+        stage.getBatch().end();
+
         stage.draw();
     }
 
@@ -51,7 +64,7 @@ public abstract class Level {
     }
 
     public void resize(float w, float h) {
-        stage.getViewport().setScreenSize(MathUtils.round(w), MathUtils.round(h));
+        stage.getViewport().update(MathUtils.round(w), MathUtils.round(h), true);
     }
 
     public void setBackgroundColor(float r, float g, float b, float a) {
