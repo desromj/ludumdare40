@@ -36,20 +36,25 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         levels = new ArrayList<Level>();
 
-        //Dodge level
-        DodgeLevel dodge = new DodgeLevel(camera);
-        dodge.setActive(true);
-        levels.add(dodge);
-      
+        // Timing Level
+        TimingLevel time = new TimingLevel(camera);
+        time.setActive(true);
+        levels.add(time);
+
         // Balance Level
         BalanceLevel balance = new BalanceLevel(camera);
         balance.setActive(false);
         levels.add(balance);
 
-        // Timing Level
-        TimingLevel time = new TimingLevel(camera);
-        time.setActive(false);
-        levels.add(time);
+        // Dodge level
+        DodgeLevel dodge = new DodgeLevel(camera);
+        dodge.setActive(false);
+        levels.add(dodge);
+
+        // Sequence level
+        SequenceLevel sequence = new SequenceLevel(camera);
+        sequence.setActive(false);
+        levels.add(sequence);
     }
 
 
@@ -128,6 +133,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
         if (keycode == Input.Keys.NUM_3) {
             levels.get(2).setActive(!levels.get(2).isActive());
+        }
+        if (keycode == Input.Keys.NUM_4) {
+            levels.get(3).setActive(!levels.get(3).isActive());
         }
 
         return false;
