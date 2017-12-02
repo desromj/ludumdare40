@@ -17,6 +17,7 @@ public class SequenceButton extends Actor {
     public SequenceButton(int key){
         super();
         this.key = key;
+        isActive = true;
 
         if(key == Input.Keys.C){
             sprite = Constants.spriteC;
@@ -36,7 +37,8 @@ public class SequenceButton extends Actor {
         b.draw(
                 sprite,
                 getX(),
-                getY()
+                getY(),
+                16, 16
         );
     }
 
