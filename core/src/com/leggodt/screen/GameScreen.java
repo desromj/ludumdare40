@@ -34,9 +34,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 //        clock.start();
 
         levels = new ArrayList<Level>();
+
+        // Balance Level
         BalanceLevel l = new BalanceLevel(camera);
         l.setActive(true);
         levels.add(l);
+
+        // Timing Level
+        TimingLevel time = new TimingLevel(camera);
+        time.setActive(true);
+        levels.add(time);
     }
 
 
@@ -57,20 +64,47 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Clock.tickGlobal();
 //        clock.tick();
 
-        // TODO: Update active levels here
+        // Update active levels here - inactive ones will be skipped from Level
         for (Level level: levels) {
             level.render(delta);
         }
 
-        for (Level level: levels) {
-            if (level.isActive()) {
-                // TODO: Set/Update active level viewports here
+        // Set/Update active level viewports here
+        updateLevelDimensions();
 
-            }
-        }
         Clock.releaseLock();
     }
 
+
+    public void updateLevelDimensions() {
+        int numActive = -1;
+
+        for (Level l: levels) {
+            if (l.isActive()) {
+                numActive++;
+            }
+        }
+
+        outer: for (int i = 0; i <= numActive; i++) {
+            int xPos = LevelController.POSITIONS[numActive][i][0];
+            int yPos = LevelController.POSITIONS[numActive][i][1];
+
+            int getLevelNum = i + 1;
+            int current = 1;
+
+            for (Level l: levels) {
+                if (l.isActive()) {
+                    if (getLevelNum == current) {
+                        l.getStage().getViewport().setScreenBounds(xPos, yPos,
+                                Constants.SINGLE_VIEW_WIDTH, Constants.SINGLE_VIEW_HEIGHT);
+                        continue outer;
+                    } else {
+                        current++;
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void resize(int width, int height) {
@@ -82,6 +116,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         if (keycode == Input.Keys.ESCAPE) {
             Gdx.app.exit();
         }
+
+        if (keycode == Input.Keys.B) {
+            levels.get(0).setActive(!levels.get(0).isActive());
+        }
+
         return false;
     }
 

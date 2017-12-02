@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.leggodt.util.Constants;
 
@@ -18,7 +20,7 @@ public abstract class Level {
     boolean active;
 
     public Level(OrthographicCamera camera) {
-        stage = new Stage(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera));
+        stage = new Stage(new ScalingViewport(Scaling.none, Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
         active = false;
         setBackgroundColor(0, 0, 0);
     }
@@ -79,4 +81,6 @@ public abstract class Level {
     public void setBackgroundColor(float r, float g, float b) {
         setBackgroundColor(r, g, b, 1);
     }
+
+    public Stage getStage() { return stage; }
 }
