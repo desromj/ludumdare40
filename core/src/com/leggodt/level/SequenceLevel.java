@@ -18,7 +18,7 @@ public class SequenceLevel extends Level {
     public SequenceLevel(OrthographicCamera c){
         super(c);
         clock = new Clock(true);
-        setBackgroundColor(0.11f, 0.23f, 1f);
+        setBackgroundColor(0.92f, 0f, 0.27f);
     }
 
     public void render(float delta){
