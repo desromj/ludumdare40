@@ -29,26 +29,6 @@ public class TimingBeat extends Actor {
         currentValue += delta;
         isCorrect = MathUtils.isZero(currentValue - targetValue, margin);
         isActive = currentValue < targetValue + margin;
-
-        //Too late
-        if(!isActive && !hasBeenHit){
-            level.handleLoss();
-            return;
-        }
-
-        boolean keyPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
-
-        //only allow 1 button press
-        if(keyPressed && !hasBeenHit){
-            hasBeenHit = true;
-
-            //Deduct points if not within margin
-            if(!isCorrect){
-                level.handleLoss();
-            } else {
-                level.handleSuccess();
-            }
-        }
     }
 
     public void draw(Batch b, float parentalpha){
@@ -62,4 +42,7 @@ public class TimingBeat extends Actor {
     public boolean getActive(){
         return isActive;
     }
+    public boolean getCorrect() { return isCorrect; }
+    public boolean getHasBeenHit() { return hasBeenHit; }
+    public void setHasBeenHit(Boolean b) { hasBeenHit = b; }
 }
