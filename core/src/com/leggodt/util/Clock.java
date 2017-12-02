@@ -43,6 +43,10 @@ public class Clock {
         return time;
     }
 
+    public float getTimeSeconds(){
+        return time*0.001f;
+    }
+
     public void setTime(int t){
         time = t;
     }
