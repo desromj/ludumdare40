@@ -8,18 +8,23 @@ import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
 public class SequenceButton extends Actor {
+    static final float scale = 4;
+    static float getSpriteWidth(){
+        return Constants.spriteC.getWidth()*scale;
+    }
+
     Clock clock;
     Sprite sprite;
 
     int key;
     boolean isActive;
 
-    public SequenceButton(int key){
+    public SequenceButton(int key) {
         super();
         this.key = key;
         isActive = true;
 
-        if(key == Input.Keys.C){
+        if (key == Input.Keys.C) {
             sprite = Constants.spriteC;
         } else {
             sprite = Constants.spriteX;
@@ -28,29 +33,30 @@ public class SequenceButton extends Actor {
         clock = new Clock(true);
     }
 
-    public void act(float delta){
+    public void act(float delta) {
         clock.tick();
-        isActive = Constants.SEQUENCE_BUTTON_TIME-clock.getTimeSeconds() > 0;
+        isActive = Constants.SEQUENCE_BUTTON_TIME - clock.getTimeSeconds() > 0;
     }
 
-    public void draw(Batch b, float parentAlpha){
+    public void draw(Batch b, float parentAlpha) {
         b.draw(
                 sprite,
                 getX(),
                 getY(),
-                16, 16
+                sprite.getWidth() * scale,
+                sprite.getHeight() * scale
         );
     }
 
-    public int getKey(){
+    public int getKey() {
         return key;
     }
 
-    float getFraction(){
-        return clock.getTimeSeconds()/ Constants.SEQUENCE_BUTTON_TIME;
+    float getFraction() {
+        return clock.getTimeSeconds() / Constants.SEQUENCE_BUTTON_TIME;
     }
 
-    public boolean getIsActive(){
+    public boolean getIsActive() {
         return isActive;
     }
 }

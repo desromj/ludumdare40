@@ -3,6 +3,7 @@ package com.leggodt.level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SequenceLevel extends Level {
+    Clock interpClock;
+    boolean interpolating;
+    static final float interpTime = 0.2f;
+
     Clock clock;
 
     List<SequenceButton> buttons = new ArrayList<SequenceButton>();
@@ -18,6 +23,8 @@ public class SequenceLevel extends Level {
     public SequenceLevel(OrthographicCamera c){
         super(c);
         clock = new Clock(true);
+        interpClock = new Clock(false);
+
         setBackgroundColor(0.92f, 0f, 0.27f);
     }
 
@@ -27,6 +34,7 @@ public class SequenceLevel extends Level {
         }
 
         clock.tick();
+        interpClock.tick();
         super.render(delta);
 
         handleButtonCreation();
@@ -50,9 +58,18 @@ public class SequenceLevel extends Level {
 
     void positionButtons(){
         int x = 0;
+        if(interpolating){
+            x = (int) Interpolation.swingOut.apply(SequenceButton.getSpriteWidth(), 0, interpClock.getTimeSeconds()/interpTime);
+            if(interpClock.getTimeSeconds() > interpTime){
+                interpClock.setTime(0);
+                interpClock.stop();
+                interpolating = false;
+            }
+        }
         for(int i = 0; i < buttons.size(); i++){
-            buttons.get(i).setPosition(x, 0);
-            x += 18;
+            SequenceButton b = buttons.get(i);
+            b.setPosition(x, Constants.WORLD_HEIGHT/4-b.getSpriteWidth()/2);
+            x += b.getSpriteWidth()+8;
         }
     }
 
@@ -104,5 +121,8 @@ public class SequenceLevel extends Level {
     void destroyButton(SequenceButton b){
         buttons.remove(b);
         b.remove();
+
+        interpolating = true;
+        interpClock.start();
     }
 }
