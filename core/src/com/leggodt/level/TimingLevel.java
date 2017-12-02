@@ -53,9 +53,9 @@ public class TimingLevel extends Level {
     }
 
     void handleBeatCreation(){
-        System.out.println(String.valueOf(beatClock.getTimeSeconds()));
-        if(beatClock.getTimeSeconds() > 4 * Constants.MUSIC_BEAT_TIME){
-            beatClock.setTime(beatClock.getTime() - 4*1000*Constants.MUSIC_BEAT_TIME);
+        int offset = 5;
+        if(beatClock.getTimeSeconds() > 5 * Constants.MUSIC_BEAT_TIME){
+            beatClock.setTime(beatClock.getTime() - 5*1000*Constants.MUSIC_BEAT_TIME);
             createBeat(2);
         }
     }

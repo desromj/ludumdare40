@@ -22,6 +22,7 @@ public class TimingBeat extends Actor {
         clock = new Clock(true);
         targetValue = Constants.MUSIC_BEAT_TIME*durationInBeats;
         this.level = level;
+        isActive = true;
     }
 
     public void act(float delta){
