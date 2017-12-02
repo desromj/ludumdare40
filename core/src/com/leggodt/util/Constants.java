@@ -1,5 +1,6 @@
 package com.leggodt.util;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -10,7 +11,11 @@ public class Constants {
             WORLD_HEIGHT = 720,
 
             START_SCREEN_TITLE_SCALE = 2.0f,
-            START_SCREEN_SUBTITLE_SCALE = 1.0f;
+            START_SCREEN_SUBTITLE_SCALE = 1.0f,
+
+            PTM = 64f;
+
+    public static final Vector2 GRAVITY = new Vector2(0f, -2f);
 
     public static final int MUSIC_BPM = 130;
     public static final float MUSIC_BEAT_TIME = 60f/MUSIC_BPM; //time in seconds between each beat
