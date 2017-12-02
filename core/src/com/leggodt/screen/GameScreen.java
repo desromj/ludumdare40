@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.leggodt.level.Level;
+import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
 import java.util.List;
@@ -16,11 +17,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
+    Clock clock = new Clock(false);
 
     public void init() {
         Gdx.input.setInputProcessor(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
+
+        clock.start();
     }
 
 
@@ -35,6 +39,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
+        Clock.tickGlobal();
+        clock.tick();
+
         // TODO: Update active levels here
         for (Level level: levels) {
             level.render(delta);
