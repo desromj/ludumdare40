@@ -33,7 +33,7 @@ public class Stand extends PhysicsBody {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction = 1.0f;
+        fixtureDef.friction = 0.2f;
         fixtureDef.isSensor = false;
 
         body.createFixture(fixtureDef);
@@ -50,7 +50,7 @@ public class Stand extends PhysicsBody {
 
         fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction = 1.0f;
+        fixtureDef.friction = 0.2f;
         fixtureDef.isSensor = false;
 
         body.createFixture(fixtureDef);
@@ -67,7 +67,7 @@ public class Stand extends PhysicsBody {
 
         fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction = 1.0f;
+        fixtureDef.friction = 0.2f;
         fixtureDef.isSensor = false;
 
         body.createFixture(fixtureDef);
