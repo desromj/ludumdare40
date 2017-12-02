@@ -3,10 +3,15 @@ package com.leggodt.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.leggodt.level.Level;
+import com.leggodt.level.SequenceLevel;
+import com.leggodt.level.TimingLevel;
+import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen extends ScreenAdapter implements InputProcessor {
@@ -16,11 +21,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
+//    private Clock clock;
 
     public void init() {
         Gdx.input.setInputProcessor(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
+
+//        clock = new Clock(false);
+//        clock.start();
+
+        levels = new ArrayList<Level>();
+        SequenceLevel l = new SequenceLevel(camera);
+        l.setActive(true);
+        levels.add(l);
     }
 
 
@@ -35,6 +49,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        Clock.tickGlobal();
+//        clock.tick();
+
         // TODO: Update active levels here
         for (Level level: levels) {
             level.render(delta);
@@ -46,6 +66,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
             }
         }
+        Clock.releaseLock();
     }
 
 
@@ -53,10 +74,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void resize(int width, int height) {
 
     }
-
-
-
-
 
     @Override
     public boolean keyDown(int keycode) {
