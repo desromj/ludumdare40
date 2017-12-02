@@ -5,9 +5,9 @@ package com.leggodt.util;
  */
 public class Clock {
     private static boolean firstTick = true;
-    private static long millis1;
-    private static long millis2;
-    private static int millisDelta;
+    private static double millis1;
+    private static double millis2;
+    private static float millisDelta;
     private static boolean countedGlobal;
 
     private float time;
@@ -22,14 +22,14 @@ public class Clock {
         }
 
         if(firstTick){
-            millis2 = System.currentTimeMillis()+1; //+1 to avoid 2 < 1
+            millis2 = ((double) System.nanoTime())*0.000001 + 1; //+1 to avoid 2 < 1
             firstTick = false;
         } else {
             millis2 = millis1;
         }
 
-        millis1 = System.currentTimeMillis();
-        millisDelta = (int) (millis1-millis2);
+        millis1 = ((double) System.nanoTime())*0.000001;
+        millisDelta = (float) (millis1-millis2);
         countedGlobal = true;
     }
 
