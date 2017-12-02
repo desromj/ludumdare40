@@ -19,15 +19,15 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
-    private Clock clock;
+//    private Clock clock;
 
     public void init() {
         Gdx.input.setInputProcessor(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
 
-        clock = new Clock(false);
-        clock.start();
+//        clock = new Clock(false);
+//        clock.start();
 
         levels = new ArrayList<Level>();
         levels.add(new TimingLevel(camera));
@@ -45,8 +45,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
-        Clock.tickGlobal();
-        clock.tick();
+//        Clock.tickGlobal();
+//        clock.tick();
 
         // TODO: Update active levels here
         for (Level level: levels) {
@@ -66,14 +66,6 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     public void resize(int width, int height) {
 
     }
-
-    public float getTimeSeconds(){
-        return clock.getTimeSeconds();
-    }
-
-
-
-
 
     @Override
     public boolean keyDown(int keycode) {
