@@ -15,6 +15,10 @@ public class Constants {
 
             PTM = 120f;
 
+    public static final int
+            SINGLE_VIEW_WIDTH = (int) (Constants.WORLD_WIDTH / 2f),
+            SINGLE_VIEW_HEIGHT = (int) (Constants.WORLD_HEIGHT / 2f);
+
     public static final Vector2 GRAVITY = new Vector2(0f, -2f);
 
     public static final int MUSIC_BPM = 130;
