@@ -5,9 +5,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.leggodt.level.Level;
+import com.leggodt.level.TimingLevel;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen extends ScreenAdapter implements InputProcessor {
@@ -17,14 +19,18 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
-    Clock clock = new Clock(false);
+    private Clock clock;
 
     public void init() {
         Gdx.input.setInputProcessor(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
 
+        clock = new Clock(false);
         clock.start();
+
+        levels = new ArrayList<Level>();
+        levels.add(new TimingLevel(camera));
     }
 
 
@@ -59,6 +65,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     @Override
     public void resize(int width, int height) {
 
+    }
+
+    public float getTimeSeconds(){
+        return clock.getTimeSeconds();
     }
 
 

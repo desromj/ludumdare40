@@ -40,4 +40,12 @@ public abstract class Level {
     }
 
     public boolean isActive() { return this.active; }
+
+    public void move(float x, float y){
+
+    }
+
+    public void resize(float w, float h){
+
+    }
 }
