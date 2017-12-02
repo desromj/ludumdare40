@@ -25,9 +25,11 @@ public abstract class Level {
 
     public abstract void initializeActors();
 
-    public abstract void handleLoss();
+    abstract void handleLoss();
 
-    public abstract void handleSuccess();
+    abstract void handleSuccess();
+
+    abstract void handleInput();
 
     public void render(float delta) {
         if (!active) {
