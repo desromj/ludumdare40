@@ -18,11 +18,12 @@ public class Constants {
     public static final float TIMING_TARGET_DIAMETER = 200f;
 
     public static final float SEQUENCE_BUTTON_TIME = 5f;
+    public static final float SEQUENCE_CREATE_TIME = 1.5f;
 
     public static final Sprite
         sprite1px = new Sprite(new Texture(("graphics/1px.png"))),
         spriteRing = new Sprite(new Texture("graphics/circleSprite.png")),
-        spriteC = new Sprite(new Texture("graphics/spriceC.png")),
-        spriteX = new Sprite(new Texture("graphics/spriceC.png"));
+        spriteC = new Sprite(new Texture("graphics/spriteC.png")),
+        spriteX = new Sprite(new Texture("graphics/spriteX.png"));
 
 }

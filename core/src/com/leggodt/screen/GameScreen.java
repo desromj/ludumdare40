@@ -6,6 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.leggodt.level.Level;
+import com.leggodt.level.SequenceLevel;
 import com.leggodt.level.TimingLevel;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
@@ -31,9 +32,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 //        clock.start();
 
         levels = new ArrayList<Level>();
-        TimingLevel t = new TimingLevel(camera);
-        t.setActive(true);
-        levels.add(t);
+        SequenceLevel l = new SequenceLevel(camera);
+        l.setActive(true);
+        levels.add(l);
     }
 
 
