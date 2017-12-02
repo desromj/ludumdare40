@@ -3,6 +3,7 @@ package com.leggodt.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.leggodt.level.Level;
 import com.leggodt.level.TimingLevel;
@@ -47,6 +48,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         Clock.tickGlobal();
 //        clock.tick();
 
