@@ -1,16 +1,13 @@
 package com.leggodt.level;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.leggodt.util.Constants;
 
 public abstract class Level {
@@ -19,9 +16,18 @@ public abstract class Level {
     Stage stage;
     boolean active;
 
+    static final float INTERP_TIME = 1.2f;
+    float elapsedInterpTime;
+    boolean interp;
+    Vector2 oldScreenPos, newScreenPos;
+
     public Level(OrthographicCamera camera) {
         stage = new Stage(new ScalingViewport(Scaling.none, Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
         active = false;
+        elapsedInterpTime = 0.5f;
+        interp = false;
+        oldScreenPos = new Vector2(320, 180);
+        newScreenPos = new Vector2(320, 180);
         setBackgroundColor(0, 0, 0);
     }
 
@@ -36,6 +42,27 @@ public abstract class Level {
     public void render(float delta) {
         if (!active) {
             return;
+        }
+
+        elapsedInterpTime += delta;
+
+        if (!interp && Vector2.dst(oldScreenPos.x, oldScreenPos.y, newScreenPos.x, newScreenPos.y) > 2f) {
+            this.elapsedInterpTime = 0f;
+            interp = true;
+        }
+
+        // Interpolate viewport if necessary
+        if (interp && elapsedInterpTime < INTERP_TIME) {
+            float ratio = elapsedInterpTime / INTERP_TIME;
+
+            this.stage.getViewport().setScreenBounds(
+                    (int) Interpolation.circleOut.apply(oldScreenPos.x, newScreenPos.x, ratio),
+                    (int) Interpolation.circleOut.apply(oldScreenPos.y, newScreenPos.y, ratio),
+                    Constants.SINGLE_VIEW_WIDTH,
+                    Constants.SINGLE_VIEW_HEIGHT);
+        } else {
+            this.oldScreenPos.set(this.newScreenPos);
+            interp = false;
         }
 
         stage.act(delta);
@@ -83,4 +110,9 @@ public abstract class Level {
     }
 
     public Stage getStage() { return stage; }
+
+
+    public void moveTo(int newX, int newY) {
+        newScreenPos.set(newX, newY);
+    }
 }

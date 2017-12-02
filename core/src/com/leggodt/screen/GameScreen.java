@@ -37,18 +37,18 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         levels = new ArrayList<Level>();
 
         //Dodge level
-        DodgeLevel d = new DodgeLevel(camera);
-        d.setActive(true);
-        levels.add(d);
+        DodgeLevel dodge = new DodgeLevel(camera);
+        dodge.setActive(true);
+        levels.add(dodge);
       
         // Balance Level
-        BalanceLevel l = new BalanceLevel(camera);
-        l.setActive(true);
-        levels.add(l);
+        BalanceLevel balance = new BalanceLevel(camera);
+        balance.setActive(false);
+        levels.add(balance);
 
         // Timing Level
         TimingLevel time = new TimingLevel(camera);
-        l.setActive(true);
+        time.setActive(false);
         levels.add(time);
     }
 
@@ -83,7 +83,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
 
     public void updateLevelDimensions() {
-        int numActive = -1;
+        int numActive = 0;
 
         for (Level l: levels) {
             if (l.isActive()) {
@@ -91,23 +91,20 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             }
         }
 
-        outer: for (int i = 0; i <= numActive; i++) {
-            int xPos = LevelController.POSITIONS[numActive][i][0];
-            int yPos = LevelController.POSITIONS[numActive][i][1];
+        List<int []> naps = new ArrayList<int[]>(numActive);
 
-            int getLevelNum = i + 1;
-            int current = 1;
+        for (int i = 0; i < numActive; i++) {
+            int [] newVal = {LevelController.POSITIONS[numActive-1][i][0], LevelController.POSITIONS[numActive-1][i][1]};
+            naps.add(newVal);
+        }
 
-            for (Level l: levels) {
-                if (l.isActive()) {
-                    if (getLevelNum == current) {
-                        l.getStage().getViewport().setScreenBounds(xPos, yPos,
-                                Constants.SINGLE_VIEW_WIDTH, Constants.SINGLE_VIEW_HEIGHT);
-                        continue outer;
-                    } else {
-                        current++;
-                    }
-                }
+        int current = 0;
+
+        for (Level level: levels) {
+            if (level.isActive()) {
+                int [] newVals = naps.get(current);
+                current++;
+                level.moveTo(newVals[0], newVals[1]);
             }
         }
     }
@@ -123,8 +120,14 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             Gdx.app.exit();
         }
 
-        if (keycode == Input.Keys.B) {
+        if (keycode == Input.Keys.NUM_1) {
             levels.get(0).setActive(!levels.get(0).isActive());
+        }
+        if (keycode == Input.Keys.NUM_2) {
+            levels.get(1).setActive(!levels.get(1).isActive());
+        }
+        if (keycode == Input.Keys.NUM_3) {
+            levels.get(2).setActive(!levels.get(2).isActive());
         }
 
         return false;
