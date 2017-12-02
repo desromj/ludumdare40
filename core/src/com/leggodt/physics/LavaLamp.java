@@ -32,8 +32,8 @@ public class LavaLamp extends PhysicsBody {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.friction = 0.1f;
-        fixtureDef.density = 50f;
+        fixtureDef.friction = 0.2f;
+        fixtureDef.density = 2f;
         fixtureDef.isSensor = false;
 
         body.createFixture(fixtureDef);

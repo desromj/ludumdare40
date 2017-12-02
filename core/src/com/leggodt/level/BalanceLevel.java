@@ -39,8 +39,8 @@ public class BalanceLevel extends Level {
 
         world = new World(Constants.GRAVITY, true);
 
-        lamp = new LavaLamp(300, 60, 40, 160, world);
-        stand = new Stand(270, -60, 100, 120, world);
+        lamp = new LavaLamp(120, 60, 40, 160, world);
+        stand = new Stand(90, -60, 100, 120, world);
 
         stage.addActor(lamp);
         stage.addActor(stand);
@@ -78,7 +78,7 @@ public class BalanceLevel extends Level {
 
 
     public void moveStand(float delta) {
-        stand_vel.set(0.5f * MathUtils.sin(clock.getTimeSeconds() * 2f), 0f);
+        stand_vel.set(1f * MathUtils.sin(clock.getTimeSeconds() / 1.5f), 0f);
         stand.getBody().setLinearVelocity(stand_vel);
     }
 
@@ -98,8 +98,8 @@ public class BalanceLevel extends Level {
 
     @Override
     void handleInput() {
-        Vector2 left_impulse = new Vector2(-3f, 0f);
-        Vector2 right_impulse = new Vector2(3f, 0f);
+        Vector2 left_impulse = new Vector2(-0.1f, 0f);
+        Vector2 right_impulse = new Vector2(0.1f, 0f);
 
         if (input.isKeyJustPressed(Input.Keys.LEFT)) {
             lamp.getBody().applyLinearImpulse(
