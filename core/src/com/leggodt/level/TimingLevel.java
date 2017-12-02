@@ -35,12 +35,15 @@ public class TimingLevel extends Level {
 
         Batch batch = stage.getBatch();
         batch.begin();
+        float cx = Constants.WORLD_WIDTH;
+        float cy = Constants.WORLD_HEIGHT;
+        float d = Constants.TIMING_TARGET_DIAMETER;
         batch.draw(
                 Constants.spriteRing,
-                0,
-                0,
-                Constants.TIMING_TARGET_DIAMETER,
-                Constants.TIMING_TARGET_DIAMETER);
+                cx/4-d/2,
+                cy/4-d/2,
+                d,
+                d);
         batch.end();
 
         handleBeatDestruction();

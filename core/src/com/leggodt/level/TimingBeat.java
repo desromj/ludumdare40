@@ -32,12 +32,15 @@ public class TimingBeat extends Actor {
     }
 
     public void draw(Batch b, float parentAlpha){
+        float d = Constants.TIMING_TARGET_DIAMETER*getFullFraction();
+        float cx = Constants.WORLD_WIDTH/4;
+        float cy = Constants.WORLD_HEIGHT/4;
         b.draw(
                 Constants.spriteRing,
-                0,
-                0,
-                200*getFullFraction(),
-                200*getFullFraction()
+                cx-d/2,
+                cy-d/2,
+                d,
+                d
         );
     }
 
