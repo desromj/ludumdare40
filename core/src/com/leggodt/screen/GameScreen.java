@@ -35,6 +35,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 //        clock.start();
 
         levels = new ArrayList<Level>();
+
+        //Dodge level
+        DodgeLevel d = new DodgeLevel(camera);
+        d.setActive(true);
+        levels.add(d);
       
         // Balance Level
         BalanceLevel l = new BalanceLevel(camera);
@@ -43,7 +48,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         // Timing Level
         TimingLevel time = new TimingLevel(camera);
-        time.setActive(true);
+        l.setActive(true);
         levels.add(time);
     }
 

@@ -18,12 +18,11 @@ public class DodgeBarrier extends Actor {
     }
 
     public void act(float delta){
+        isActive = (getX() + getWidth()) > 0;
         move();
-        isActive = getX() + getWidth() > 0;
     }
 
     public void draw(Batch b, float parentAlpha){
-        Gdx.app.log("Barrier", String.valueOf(getX()));
         b.setColor(0.25f, 0.4f, 0, 1);
         b.draw(
                 Constants.sprite1px,
@@ -35,7 +34,7 @@ public class DodgeBarrier extends Actor {
     }
 
     void move(){
-        moveBy(-Constants.DODGE_BARRIER_SPEED*parent.clock.getTimeSeconds(), 0);
+        moveBy(-Constants.DODGE_BARRIER_SPEED*parent.clock.getDeltaSeconds(), 0);
     }
 
     public boolean getActive(){
@@ -43,8 +42,10 @@ public class DodgeBarrier extends Actor {
     }
 
     public boolean isOverlapping(float nx, float ny, float nw, float nh){
-        boolean x = nx + nw > getX() || nx < getX() + getWidth();
-        boolean y = ny + nh > getY() || ny < getY() + getHeight();
-        return x || y;
+        return
+                nx < getX()+getWidth() &&
+                nx + nw > getX() &&
+                ny < getY()+getHeight() &&
+                ny + nh > getY();
     }
 }

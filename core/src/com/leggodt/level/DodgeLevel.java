@@ -51,7 +51,7 @@ public class DodgeLevel extends Level {
     void checkCollision(){
         for(int i = barriers.size()-1; i >= 0; i--){
             DodgeBarrier b = barriers.get(i);
-            if(b.isOverlapping(plane.getX(), plane.getY(), plane.getWidth(), plane.getHeight())){
+            if(b.isOverlapping(plane.getX(), plane.getY(), 20, 10)){
                 handleLoss();
                 destroyBarrier(b);
             }
@@ -80,15 +80,16 @@ public class DodgeLevel extends Level {
 
     void createBarrier(){
         DodgeBarrier b;
-        float h = Constants.WORLD_WIDTH*0.3f;
+        float h = Constants.WORLD_HEIGHT*0.3f;
         int d = MathUtils.round(MathUtils.random());
         if(d == 0){
-            b = new DodgeBarrier(Constants.WORLD_WIDTH/2, h, 60, h, this);
+            b = new DodgeBarrier(Constants.WORLD_WIDTH/2, 0, 60, h, this);
         } else {
-            b = new DodgeBarrier(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2, 60, h, this);
+            b = new DodgeBarrier(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2-h, 60, h, this);
         }
         stage.addActor(b);
         barriers.add(b);
+
     }
 
     void handleBarrierDestruction(){
