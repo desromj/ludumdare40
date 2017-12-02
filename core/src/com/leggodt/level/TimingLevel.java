@@ -23,6 +23,10 @@ public class TimingLevel extends Level {
     }
 
     public void render(float delta){
+        if (!active) {
+            return;
+        }
+
         super.render(delta);
         beatClock.tick();
 

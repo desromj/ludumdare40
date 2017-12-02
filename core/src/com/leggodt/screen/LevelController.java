@@ -6,26 +6,11 @@ import com.leggodt.util.Constants;
 import java.util.List;
 
 public class LevelController {
-    public void updateLevelDimensions(List<Level> levels, int N){
-        for(int i = 0; i < levels.size(); i++){
-            Level l = levels.get(i);
-            l.move(positions[N][i][0]*Constants.WORLD_WIDTH, positions[N][i][1]*Constants.WORLD_HEIGHT);
-            l.resize(sizes[N][i][0]*Constants.WORLD_WIDTH, sizes[N][i][1]*Constants.WORLD_HEIGHT);
-        }
-    }
-
     //[amount of levels] [level index] [dimension (x, y)]
-    private static float[][][] positions = {
-            {{0, 0}, {0, 0},    {0, 0},         {0, 0}},
-            {{0, 0}, {0.5f, 0}, {0, 0},         {0, 0}},
-            {{0, 0}, {0.5f, 0}, {0.25f, 0.5f},  {0, 0}},
-            {{0, 0}, {0.5f, 0}, {0, 0.5f},      {0.5f, 0.5f}}
-    };
-
-    private static float[][][] sizes = {
-            {{1, 1},        {0, 0},         {0, 0},         {0.5f, 0.5f}},
-            {{0.5f, 1},     {0.5f, 1},      {0, 0},         {0.5f, 0.5f}},
-            {{0.5f, 0.5f},  {0.5f, 0.5f},   {0.5f, 0.5f},   {0.5f, 0.5f}},
-            {{0.5f, 0.5f},  {0.5f, 0.5f},   {0.5f, 0.5f},   {0.5f, 0.5f}}
+    public static final int[][][] POSITIONS = {
+            {{320, 180}},
+            {{0, 180}, {640, 180}},
+            {{0, 360}, {640, 360}, {320, 0}},
+            {{0, 360}, {640, 360}, {0, 0}, {640, 0}}
     };
 }
