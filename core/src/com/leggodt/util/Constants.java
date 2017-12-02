@@ -29,7 +29,7 @@ public class Constants {
     public static final float SEQUENCE_BUTTON_TIME = 5f;
     public static final float SEQUENCE_CREATE_TIME = 1.5f;
 
-    public static final float DODGE_BARRIER_SPEED = 40; //per second
+    public static final float DODGE_BARRIER_SPEED = 80; //per second
     public static final float DODGE_CREATION_TIME = 6;
     public static final float DODGE_MOVE_SPEED = 80;
 
