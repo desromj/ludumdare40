@@ -1,10 +1,12 @@
 package com.leggodt.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.leggodt.level.BalanceLevel;
 import com.leggodt.level.Level;
 import com.leggodt.level.SequenceLevel;
 import com.leggodt.level.TimingLevel;
@@ -32,7 +34,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 //        clock.start();
 
         levels = new ArrayList<Level>();
-        SequenceLevel l = new SequenceLevel(camera);
+        BalanceLevel l = new BalanceLevel(camera);
         l.setActive(true);
         levels.add(l);
     }
@@ -77,6 +79,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.ESCAPE) {
+            Gdx.app.exit();
+        }
         return false;
     }
 

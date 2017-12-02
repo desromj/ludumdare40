@@ -21,7 +21,7 @@ public class LavaLamp extends PhysicsBody {
                 (this.getY() + this.getHeight() / 2f) / Constants.PTM
         );
 
-        Body body = world.createBody(bodyDef);
+        this.body = world.createBody(bodyDef);
 
         // Fixtures
         PolygonShape shape = new PolygonShape();
@@ -32,6 +32,8 @@ public class LavaLamp extends PhysicsBody {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
+        fixtureDef.friction = 0.1f;
+        fixtureDef.density = 50f;
         fixtureDef.isSensor = false;
 
         body.createFixture(fixtureDef);
