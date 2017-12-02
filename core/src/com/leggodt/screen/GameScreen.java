@@ -30,7 +30,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 //        clock.start();
 
         levels = new ArrayList<Level>();
-        levels.add(new TimingLevel(camera));
+        TimingLevel t = new TimingLevel(camera);
+        t.setActive(true);
+        levels.add(t);
     }
 
 
@@ -45,7 +47,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     @Override
     public void render(float delta) {
-//        Clock.tickGlobal();
+        Clock.tickGlobal();
 //        clock.tick();
 
         // TODO: Update active levels here
@@ -59,6 +61,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
             }
         }
+        Clock.releaseLock();
     }
 
 

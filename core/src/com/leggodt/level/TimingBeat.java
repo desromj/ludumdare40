@@ -1,17 +1,15 @@
 package com.leggodt.level;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
 public class TimingBeat extends Actor {
+    Clock clock;
+
     float targetValue;
-    float currentValue;
-    float margin;
 
     boolean isActive;
     boolean isCorrect;
@@ -19,24 +17,31 @@ public class TimingBeat extends Actor {
 
     static TimingLevel level;
 
-    public TimingBeat(TimingLevel level) {
+    public TimingBeat(TimingLevel level, int durationInBeats) {
         super();
-        targetValue = Constants.BEAT_TIME;
+        clock = new Clock(true);
+        targetValue = Constants.MUSIC_BEAT_TIME*durationInBeats;
         this.level = level;
     }
 
     public void act(float delta){
-        currentValue += delta;
-        isCorrect = MathUtils.isZero(currentValue - targetValue, margin);
-        isActive = currentValue < targetValue + margin;
+        clock.tick();
+        isCorrect = MathUtils.isZero(clock.getTimeSeconds() - targetValue, Constants.TIMING_MARGIN);
+        isActive = clock.getTimeSeconds() < targetValue + Constants.TIMING_MARGIN;
     }
 
     public void draw(Batch b, float parentalpha){
         b.draw(
                 Constants.spriteRing,
                 0,
-                0
+                0,
+                200*getFullFraction(),
+                200*getFullFraction()
         );
+    }
+
+    float getFullFraction(){
+        return clock.getTimeSeconds()/targetValue;
     }
 
     public boolean getActive(){
