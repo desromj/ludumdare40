@@ -51,6 +51,10 @@ public class BalanceLevel extends Level {
 
     @Override
     public void render(float delta) {
+        if (!active) {
+            return;
+        }
+
         super.render(delta);
 
         clock.tick();

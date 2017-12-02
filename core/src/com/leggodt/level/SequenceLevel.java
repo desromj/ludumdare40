@@ -22,6 +22,10 @@ public class SequenceLevel extends Level {
     }
 
     public void render(float delta){
+        if (!active) {
+            return;
+        }
+
         clock.tick();
         super.render(delta);
 
