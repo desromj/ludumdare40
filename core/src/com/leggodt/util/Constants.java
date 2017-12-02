@@ -13,7 +13,8 @@ public class Constants {
             START_SCREEN_SUBTITLE_SCALE = 1.0f;
 
     public static final int MUSIC_BPM = 130;
-    public static final float BEAT_TIME = 60f/MUSIC_BPM; //time in seconds between each beat
+    public static final float MUSIC_BEAT_TIME = 60f/MUSIC_BPM; //time in seconds between each beat
+    public static final float TIMING_MARGIN = 0.25f;
 
     public static final Sprite spriteRing = new Sprite(new Texture("graphics/circleSprite.png"));
 }
