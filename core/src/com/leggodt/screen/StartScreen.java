@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.leggodt.DareGame;
 import com.leggodt.util.Constants;
+import sun.security.ssl.Debug;
 
 /**
  * Created by Quiv on 23-01-2017.
