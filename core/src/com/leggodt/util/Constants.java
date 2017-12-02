@@ -17,5 +17,6 @@ public class Constants {
     public static final float TIMING_MARGIN = 0.25f;
     public static final float TIMING_TARGET_DIAMETER = 200f;
 
+    public static final Sprite sprite1px = new Sprite(new Texture(("graphics/1px.png")));
     public static final Sprite spriteRing = new Sprite(new Texture("graphics/circleSprite.png"));
 }
