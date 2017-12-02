@@ -6,9 +6,7 @@ import com.leggodt.util.Constants;
 import java.util.List;
 
 public class LevelController {
-    static int N = 1;
-
-    public void updateLevelDimensions(List<Level> levels){
+    public void updateLevelDimensions(List<Level> levels, int N){
         for(int i = 0; i < levels.size(); i++){
             Level l = levels.get(i);
             l.move(positions[N][i][0]*Constants.WORLD_WIDTH, positions[N][i][1]*Constants.WORLD_HEIGHT);
