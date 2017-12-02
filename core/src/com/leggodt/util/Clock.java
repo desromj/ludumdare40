@@ -4,19 +4,37 @@ package com.leggodt.util;
  * Created by maia on 5/1/17.
  */
 public class Clock {
+    private static boolean firstTick = true;
     private static long millis1;
     private static long millis2;
     private static int millisDelta;
+    private static boolean countedGlobal;
 
-    private int time;
+    private float time;
     private float delta;
     private float multiplier;
     private boolean running;
 
     public static void tickGlobal(){
-        millis2 = millis1;
+        if(countedGlobal){
+            System.out.println("Warning: Clock.tickGlobal called more than once per update loop!");
+            return;
+        }
+
+        if(firstTick){
+            millis2 = System.currentTimeMillis()+1; //+1 to avoid 2 < 1
+            firstTick = false;
+        } else {
+            millis2 = millis1;
+        }
+
         millis1 = System.currentTimeMillis();
         millisDelta = (int) (millis1-millis2);
+        countedGlobal = true;
+    }
+
+    public static void releaseLock(){
+        countedGlobal = false;
     }
 
     public Clock(boolean running){
@@ -28,7 +46,7 @@ public class Clock {
 
     public void tick(){
         if(running) {
-            delta = millisDelta * multiplier;
+            delta = ((float) millisDelta) * multiplier;
             time += delta;
         } else {
             delta = 0;
@@ -39,7 +57,7 @@ public class Clock {
     public void start(){ running = true; delta = millisDelta * multiplier;}
     public void stop(){ running = false; delta = 0;}
 
-    public int getTime(){
+    public float getTime(){
         return time;
     }
 
@@ -47,8 +65,12 @@ public class Clock {
         return time*0.001f;
     }
 
-    public void setTime(int t){
+    public void setTime(float t){
         time = t;
+    }
+
+    public void setTimeSeconds(float t){
+        time = t*0.001f;
     }
 
     public float getDelta(){
