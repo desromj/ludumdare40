@@ -3,6 +3,7 @@ package com.leggodt.level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.leggodt.util.Constants;
@@ -41,10 +42,10 @@ public abstract class Level {
     public boolean isActive() { return this.active; }
 
     public void move(float x, float y){
-
+        stage.getViewport().setScreenPosition(MathUtils.round(x), MathUtils.round(y));
     }
 
     public void resize(float w, float h){
-
+        stage.getViewport().setScreenSize(MathUtils.round(w), MathUtils.round(h));
     }
 }
