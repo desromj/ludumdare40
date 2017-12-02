@@ -3,6 +3,7 @@ package com.leggodt.level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
@@ -28,6 +29,16 @@ public class TimingLevel extends Level {
         handleBeatCreation();
         handleInput();
 
+        Batch batch = stage.getBatch();
+        batch.begin();
+        batch.draw(
+                Constants.spriteRing,
+                0,
+                0,
+                Constants.TIMING_TARGET_DIAMETER,
+                Constants.TIMING_TARGET_DIAMETER);
+        batch.end();
+
         //Remove beats that have passed, handle loss for missed beats
         for(int i = beats.size()-1; i >= 0; i--){
             TimingBeat b = beats.get(i);
@@ -45,18 +56,19 @@ public class TimingLevel extends Level {
     }
 
     public void handleLoss(){
-
+        System.out.println("Timing fail");
     }
 
     public void handleSuccess(){
-
+        System.out.println("Timing success");
     }
 
     void handleBeatCreation(){
-        int offset = 5;
-        if(beatClock.getTimeSeconds() > 5 * Constants.MUSIC_BEAT_TIME){
-            beatClock.setTime(beatClock.getTime() - 5*1000*Constants.MUSIC_BEAT_TIME);
-            createBeat(2);
+        int period = 4;
+        int duration = 8;
+        if(beatClock.getTimeSeconds() > period * Constants.MUSIC_BEAT_TIME){
+            beatClock.setTime(beatClock.getTime() - period*1000*Constants.MUSIC_BEAT_TIME);
+            createBeat(8);
         }
     }
 
@@ -72,15 +84,18 @@ public class TimingLevel extends Level {
     }
 
     void handleInput(){
-        boolean keyPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
+        boolean keyPressed = Gdx.input.isKeyJustPressed(Input.Keys.SPACE);
 
         if(keyPressed){
             //Find the oldest beat that hasn't been hit yet
-            for(TimingBeat b : beats){
+            for(int i = 0; i < beats.size(); i++){
+                TimingBeat b = beats.get(i);
+                //TODO: hasbeenhit is useless if every spacebar event deactivates the beat
                 if(b.getHasBeenHit()){
                     continue;
                 } else {
                     b.setHasBeenHit(true);
+                    b.setActive(false);
 
                     //Deduct points if not within margin
                     if(!b.getCorrect()){

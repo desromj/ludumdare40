@@ -50,5 +50,6 @@ public class TimingBeat extends Actor {
     }
     public boolean getCorrect() { return isCorrect; }
     public boolean getHasBeenHit() { return hasBeenHit; }
+    public void setActive(boolean a){ isActive = a;}
     public void setHasBeenHit(Boolean b) { hasBeenHit = b; }
 }
