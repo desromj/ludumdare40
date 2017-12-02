@@ -41,11 +41,11 @@ public class SequenceLevel extends Level {
     }
 
     void handleSuccess(){
-
+        Gdx.app.log("Sequence", "Success");
     }
 
     void handleLoss(){
-
+        Gdx.app.log("Sequence", "Fail");
     }
 
     void positionButtons(){

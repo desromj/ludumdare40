@@ -43,16 +43,8 @@ public class TimingLevel extends Level {
                 Constants.TIMING_TARGET_DIAMETER);
         batch.end();
 
-        //Remove beats that have passed, handle loss for missed beats
-        for(int i = beats.size()-1; i >= 0; i--){
-            TimingBeat b = beats.get(i);
-            if(!b.getActive()){
-                destroyBeat(b);
-                if(!b.getHasBeenHit()){
-                    handleLoss();
-                }
-            }
-        }
+        handleBeatDestruction();
+
     }
 
     public void initializeActors(){
@@ -80,6 +72,18 @@ public class TimingLevel extends Level {
         TimingBeat b = new TimingBeat(this, durationInBeats);
         stage.addActor(b);
         beats.add(b);
+    }
+
+    void handleBeatDestruction(){
+        for(int i = beats.size()-1; i >= 0; i--){
+            TimingBeat b = beats.get(i);
+            if(!b.getActive()){
+                destroyBeat(b);
+                if(!b.getHasBeenHit()){
+                    handleLoss();
+                }
+            }
+        }
     }
 
     void destroyBeat(TimingBeat b){

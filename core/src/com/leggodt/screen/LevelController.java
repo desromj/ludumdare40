@@ -6,7 +6,6 @@ import com.leggodt.util.Constants;
 import java.util.List;
 
 public class LevelController {
-
     //[amount of levels] [level index] [dimension (x, y)]
     public static final int[][][] POSITIONS = {
             {{320, 180}},
