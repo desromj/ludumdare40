@@ -15,6 +15,7 @@ public class SequenceButton extends Actor {
     boolean isActive;
 
     public SequenceButton(int key){
+        super();
         this.key = key;
 
         if(key == Input.Keys.C){
