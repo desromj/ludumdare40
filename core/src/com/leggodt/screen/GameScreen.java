@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.leggodt.level.DodgeLevel;
 import com.leggodt.level.BalanceLevel;
 import com.leggodt.level.Level;
@@ -24,6 +25,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
+    private static int health;
+
 //    private Clock clock;
 
     public void init() {
@@ -31,6 +34,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
 
+        health = 20;
 //        clock = new Clock(false);
 //        clock.start();
 
@@ -79,6 +83,9 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         for (Level level: levels) {
             level.render(delta);
         }
+
+        //TODO: make this work
+        //displayHealth();
 
         // Set/Update active level viewports here
         updateLevelDimensions();
@@ -139,6 +146,24 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
 
         return false;
+    }
+
+    void displayHealth(Batch b){
+        float margin = Constants.HEALTH_HEIGHT*1.2f;
+        float x = margin;
+        for(int i = 0; i < health; i++){
+            b.draw(
+                    Constants.spriteHealth,
+                    x, Constants.WORLD_HEIGHT - margin,
+                    Constants.HEALTH_WIDTH, Constants.HEALTH_HEIGHT
+            );
+
+            x += Constants.HEALTH_WIDTH+margin;
+        }
+    }
+
+    public static void addHealth(int h){
+        health += h;
     }
 
     @Override
