@@ -34,11 +34,16 @@ public class Constants {
     public static final float DODGE_MOVE_SPEED = 80;
 
     public static final Sprite
+        spriteHealth = new Sprite(new Texture("graphics/health.png")),
         sprite1px = new Sprite(new Texture(("graphics/1px.png"))),
         spriteRing = new Sprite(new Texture("graphics/circleSprite.png")),
         spriteC = new Sprite(new Texture("graphics/spriteC.png")),
         spriteX = new Sprite(new Texture("graphics/spriteX.png")),
 
         spritePlane = new Sprite(new Texture("graphics/simplePlane.png"));
+
+
+    public static final float HEALTH_WIDTH = 32;
+    public static final float HEALTH_HEIGHT = HEALTH_WIDTH/spriteHealth.getWidth()*spriteHealth.getHeight();
 
 }
