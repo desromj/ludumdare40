@@ -2,6 +2,7 @@ package com.leggodt;
 
 import com.badlogic.gdx.Game;
 import com.leggodt.screen.GameScreen;
+import com.leggodt.screen.LevelController;
 import com.leggodt.screen.StartScreen;
 import com.leggodt.util.MusicController;
 
@@ -22,6 +23,9 @@ public class DareGame extends Game {
             MusicController.play(MusicController.GAME);
             instance.setScreen(GameScreen.getInstance());
             GameScreen.getInstance().init();
+
+            LevelController.init();
+            LevelController.startSequence();
 
         } else if (type == StartScreen.class) {
             MusicController.play(MusicController.MENU);
