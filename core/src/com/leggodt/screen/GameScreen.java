@@ -149,16 +149,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     }
 
     void displayHealth(Batch b){
-        float margin = Constants.HEALTH_HEIGHT*1.2f;
+        float margin = Constants.HEART_HEIGHT*1.2f;
         float x = margin;
         for(int i = 0; i < health; i++){
             b.draw(
-                    Constants.spriteHealth,
+                    Constants.spriteHeart,
                     x, Constants.WORLD_HEIGHT - margin,
-                    Constants.HEALTH_WIDTH, Constants.HEALTH_HEIGHT
+                    Constants.HEART_WIDTH, Constants.HEART_HEIGHT
             );
 
-            x += Constants.HEALTH_WIDTH+margin;
+            x += Constants.HEART_WIDTH+margin;
         }
     }
 
