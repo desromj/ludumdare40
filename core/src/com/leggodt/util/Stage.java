@@ -13,6 +13,10 @@ public class Stage {
         return duration;
     }
 
+    public int[] getLevels(){
+        return levels;
+    }
+
     public boolean containsLevel(int l){
         for(int i = 0; i < levels.length; i++){
             if(levels[i] == l){
