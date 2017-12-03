@@ -32,7 +32,7 @@ public class Constants {
 
     public static final float DODGE_BARRIER_SPEED = 80; //per second
     public static final float DODGE_CREATION_TIME = 6;
-    public static final float DODGE_MOVE_SPEED = 80;
+    public static final float DODGE_MOVE_SPEED = 120;
 
     public static final Sprite
         spriteHeart = new Sprite(new Texture("graphics/heart.png")),
