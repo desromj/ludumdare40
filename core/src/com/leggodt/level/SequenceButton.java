@@ -36,7 +36,7 @@ public class SequenceButton extends Actor {
 
         timerBar.setForegroundColor(1, 0.73f, 0.82f);
         timerBar.setBackgroundColor(0.37f, 0.04f, 0.15f);
-        clock = new Clock(true);
+        clock = new Clock(false);
     }
 
     public void act(float delta) {

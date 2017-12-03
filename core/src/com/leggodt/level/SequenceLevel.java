@@ -113,14 +113,22 @@ public class SequenceLevel extends Level {
         } else {
             b = new SequenceButton(Input.Keys.C);
         }
+
+        if(buttons.size() == 0){
+            b.clock.start();
+        }
+
         stage.addActor(b);
         buttons.add(b);
-        System.out.println("Button created");
     }
 
     void destroyButton(SequenceButton b){
         buttons.remove(b);
         b.remove();
+
+        if(buttons.size() > 0){
+            buttons.get(0).clock.start();
+        }
 
         interpolating = true;
         interpClock.start();
