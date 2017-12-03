@@ -27,7 +27,7 @@ public class Constants {
     public static final float TIMING_TARGET_DIAMETER = 200f;
 
     public static final float SEQUENCE_BUTTON_TIME = 5f;
-    public static final float SEQUENCE_CREATE_TIME = 1.5f;
+    public static final float SEQUENCE_CREATE_TIME = 2*MUSIC_BEAT_TIME;
 
     public static final float DODGE_BARRIER_SPEED = 80; //per second
     public static final float DODGE_CREATION_TIME = 6;
@@ -39,6 +39,6 @@ public class Constants {
         spriteC = new Sprite(new Texture("graphics/spriteC.png")),
         spriteX = new Sprite(new Texture("graphics/spriteX.png")),
 
-        spritePlane = new Sprite(new Texture("graphics/badPlane.png"));
+        spritePlane = new Sprite(new Texture("graphics/simplePlane.png"));
 
 }
