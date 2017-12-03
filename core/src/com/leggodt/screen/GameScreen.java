@@ -42,7 +42,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         // Timing Level
         TimingLevel time = new TimingLevel(camera);
-        time.setActive(true);
+        time.setActive(false);
         levels.add(time);
 
         // Balance Level
@@ -77,7 +77,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Clock.tickGlobal();
-//        clock.tick();
+
+        LevelController.render();
 
         // Update active levels here - inactive ones will be skipped from Level
         for (Level level: levels) {
@@ -164,6 +165,10 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public static void addHealth(int h){
         health += h;
+    }
+
+    public static void setLevelActive(int l, boolean a){
+        getInstance().levels.get(l).setActive(a);
     }
 
     @Override
