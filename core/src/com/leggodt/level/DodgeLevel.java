@@ -54,7 +54,10 @@ public class DodgeLevel extends Level {
     void checkCollision(){
         for(int i = barriers.size()-1; i >= 0; i--){
             DodgeBarrier b = barriers.get(i);
-            if(b.isOverlapping(plane.getX(), plane.getY(), 20, 10)){
+            if(b.isOverlapping(
+                    plane.getX(), plane.getY()+plane.height/4,
+                    plane.width, plane.height/2)
+                    ){
                 handleLoss();
                 destroyBarrier(b);
             }

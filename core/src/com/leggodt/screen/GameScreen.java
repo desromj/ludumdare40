@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.leggodt.level.DodgeLevel;
 import com.leggodt.level.BalanceLevel;
 import com.leggodt.level.Level;
@@ -24,6 +25,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private GameScreen() {}
     private List<Level> levels;
 
+    private static int health;
+
 //    private Clock clock;
 
     public void init() {
@@ -31,6 +34,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
 
+        health = 20;
 //        clock = new Clock(false);
 //        clock.start();
 
@@ -38,7 +42,7 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
         // Timing Level
         TimingLevel time = new TimingLevel(camera);
-        time.setActive(true);
+        time.setActive(false);
         levels.add(time);
 
         // Balance Level
@@ -73,12 +77,16 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Clock.tickGlobal();
-//        clock.tick();
+
+        LevelController.render();
 
         // Update active levels here - inactive ones will be skipped from Level
         for (Level level: levels) {
             level.render(delta);
         }
+
+        //TODO: make this work
+        //displayHealth();
 
         // Set/Update active level viewports here
         updateLevelDimensions();
@@ -139,6 +147,28 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         }
 
         return false;
+    }
+
+    void displayHealth(Batch b){
+        float margin = Constants.HEART_HEIGHT*1.2f;
+        float x = margin;
+        for(int i = 0; i < health; i++){
+            b.draw(
+                    Constants.spriteHeart,
+                    x, Constants.WORLD_HEIGHT - margin,
+                    Constants.HEART_WIDTH, Constants.HEART_HEIGHT
+            );
+
+            x += Constants.HEART_WIDTH+margin;
+        }
+    }
+
+    public static void addHealth(int h){
+        health += h;
+    }
+
+    public static void setLevelActive(int l, boolean a){
+        getInstance().levels.get(l).setActive(a);
     }
 
     @Override

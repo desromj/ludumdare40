@@ -5,6 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.leggodt.util.Constants;
 
 public class DodgePlane extends Actor {
+    public static final int width = 64;
+    public static final int height = 64;
+
     public DodgePlane(float x, float y){
         super();
         setPosition(x, y);
@@ -17,9 +20,9 @@ public class DodgePlane extends Actor {
     public void draw(Batch b,float parentAlpha){
         b.draw(
                 Constants.spritePlane,
-                getX(),
-                getY(),
-                64, 64
+                getX()-width/2,
+                getY()-height/2,
+                width, height
         );
     }
 }
