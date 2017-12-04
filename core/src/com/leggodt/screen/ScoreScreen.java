@@ -24,7 +24,11 @@ public class ScoreScreen extends ScreenAdapter {
     ShapeRenderer renderer;
     BitmapFont font;
 
+    float ignoreInputFor;
+
     public ScoreScreen() {
+        ignoreInputFor = 2f;
+
         viewport = new ExtendViewport(
                 Constants.WORLD_WIDTH,
                 Constants.WORLD_HEIGHT);
@@ -39,9 +43,11 @@ public class ScoreScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         // Go back to start screen on any input
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+        if (ignoreInputFor < 0 && Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             DareGame.setScreen(StartScreen.class);
         }
+
+        ignoreInputFor -= delta;
 
         viewport.apply();
 
@@ -97,8 +103,7 @@ public class ScoreScreen extends ScreenAdapter {
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         viewport.update(width, height, true);
     }
 
