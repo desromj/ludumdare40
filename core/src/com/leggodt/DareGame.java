@@ -20,12 +20,12 @@ public class DareGame extends Game {
 
     public static void setScreen(Class type) {
         if (type == GameScreen.class) {
-            MusicController.play(MusicController.GAME);
             instance.setScreen(GameScreen.getInstance());
             GameScreen.getInstance().init();
 
             LevelController.init();
             LevelController.startSequence();
+            MusicController.play(MusicController.GAME);
 
         } else if (type == StartScreen.class) {
             MusicController.play(MusicController.MENU);

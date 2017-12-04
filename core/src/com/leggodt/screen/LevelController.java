@@ -1,12 +1,10 @@
 package com.leggodt.screen;
 
-import com.badlogic.gdx.Gdx;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 import com.leggodt.util.Stage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LevelController {
