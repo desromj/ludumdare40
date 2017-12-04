@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
+import com.leggodt.screen.GameScreen;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
@@ -44,7 +45,7 @@ public class DodgeLevel extends Level {
     }
 
     void handleLoss() {
-        Gdx.app.log("Dodge", "Loss");
+        GameScreen.getInstance().addHealth(-4);
     }
 
     void handleSuccess() {

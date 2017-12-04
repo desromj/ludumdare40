@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.leggodt.screen.GameScreen;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
@@ -48,12 +49,10 @@ public class SequenceLevel extends Level {
 
     }
 
-    void handleSuccess(){
-        Gdx.app.log("Sequence", "Success");
-    }
+    void handleSuccess() {}
 
-    void handleLoss(){
-        Gdx.app.log("Sequence", "Fail");
+    void handleLoss() {
+        GameScreen.getInstance().addHealth(-3);
     }
 
     void positionButtons(){

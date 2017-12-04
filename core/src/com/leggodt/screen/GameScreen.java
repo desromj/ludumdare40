@@ -7,6 +7,13 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.leggodt.DareGame;
 import com.leggodt.level.DodgeLevel;
 import com.leggodt.level.BalanceLevel;
 import com.leggodt.level.Level;
@@ -22,23 +29,33 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
     private static GameScreen instance = null;
 
     private OrthographicCamera camera;
+    private Viewport viewport;
     private GameScreen() {}
     private List<Level> levels;
 
     private static int health;
+    private static float startTime;
 
-//    private Clock clock;
+    SpriteBatch spriteBatch;
+    GameHUD hud;
+
+    private Clock clock;
 
     public void init() {
         Gdx.input.setInputProcessor(this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
+        viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
+        spriteBatch = new SpriteBatch();
 
         health = 20;
-//        clock = new Clock(false);
-//        clock.start();
+        startTime = TimeUtils.nanosToMillis(TimeUtils.nanoTime()) / 1000f;
+
+        clock = new Clock(false);
+        clock.start();
 
         levels = new ArrayList<Level>();
+        hud = new GameHUD();
 
         // Timing Level
         TimingLevel time = new TimingLevel(camera);
@@ -85,8 +102,11 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
             level.render(delta);
         }
 
-        //TODO: make this work
-        //displayHealth();
+        // TODO: Render health and score
+        spriteBatch.setProjectionMatrix(this.viewport.getCamera().combined);
+        spriteBatch.begin();
+        hud.draw(spriteBatch, 255f);
+        spriteBatch.end();
 
         // Set/Update active level viewports here
         updateLevelDimensions();
@@ -149,23 +169,22 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         return false;
     }
 
-    void displayHealth(Batch b){
-        float margin = Constants.HEART_HEIGHT*1.2f;
-        float x = margin;
-        for(int i = 0; i < health; i++){
-            b.draw(
-                    Constants.spriteHeart,
-                    x, Constants.WORLD_HEIGHT - margin,
-                    Constants.HEART_WIDTH, Constants.HEART_HEIGHT
-            );
 
-            x += Constants.HEART_WIDTH+margin;
+    public void addHealth(int h){
+        health += h;
+        if (health <= 0) {
+            DareGame.score().setScore(instance.getScore());
+
+            // Show game over screen here
+            DareGame.setScreen(ScoreScreen.class);
         }
     }
-
-    public static void addHealth(int h){
-        health += h;
+    public int getHealth() { return health; }
+    public int getScore() {
+        float now = TimeUtils.nanosToMillis(TimeUtils.nanoTime()) / 1000f;
+        return (int) ((now - startTime) / 2.5f);
     }
+    public Viewport getViewport() { return instance.viewport; }
 
     public static void setLevelActive(int l, boolean a){
         getInstance().levels.get(l).setActive(a);
