@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.leggodt.DareGame;
 import com.leggodt.level.DodgeLevel;
 import com.leggodt.level.BalanceLevel;
 import com.leggodt.level.Level;
@@ -171,6 +172,12 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
 
     public void addHealth(int h){
         health += h;
+        if (health <= 0) {
+            DareGame.score().setScore(instance.getScore());
+
+            // Show game over screen here
+            DareGame.setScreen(ScoreScreen.class);
+        }
     }
     public int getHealth() { return health; }
     public int getScore() {

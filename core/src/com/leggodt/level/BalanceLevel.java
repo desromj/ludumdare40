@@ -1,12 +1,12 @@
 package com.leggodt.level;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.leggodt.physics.LavaLamp;
 import com.leggodt.physics.Stand;
 import com.leggodt.screen.GameScreen;
@@ -23,8 +23,7 @@ public class BalanceLevel extends Level {
 
     Vector2 stand_vel;
     Clock clock;
-
-    Box2DDebugRenderer debugRenderer;
+    float startTime;
 
     public BalanceLevel(OrthographicCamera camera) {
         super(camera);
@@ -43,10 +42,10 @@ public class BalanceLevel extends Level {
         lamp = new LavaLamp(120, 60, 60, 180, world);
         stand = new Stand(90, -60, 100, 120, world);
 
+        this.startTime = TimeUtils.nanosToMillis(TimeUtils.nanoTime()) / 1000f;
+
         stage.addActor(lamp);
         stage.addActor(stand);
-
-        debugRenderer = new Box2DDebugRenderer();
     }
 
 
@@ -67,21 +66,13 @@ public class BalanceLevel extends Level {
 
         stage.draw();
 
-        debugRenderer.render(
-                world,
-                stage.getCamera().combined.cpy().scale(
-                        Constants.PTM,
-                        Constants.PTM,
-                        0
-                )
-        );
-
         handleLoss();
     }
 
 
     public void moveStand(float delta) {
-        stand_vel.set(1f * MathUtils.sin(clock.getTimeSeconds() / 1.5f), 0f);
+        float elapsed = TimeUtils.nanosToMillis(TimeUtils.nanoTime()) / 1000f;
+        stand_vel.set(-MathUtils.sin((startTime - elapsed) * delta * 36f), 0f);
         stand.getBody().setLinearVelocity(stand_vel);
     }
 

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.leggodt.util.Constants;
 
 public class GameHUD extends Actor {
@@ -29,7 +28,7 @@ public class GameHUD extends Actor {
 
         font.draw(
                 batch,
-                label + ": ",
+                label + " ",
                 Constants.WORLD_WIDTH / 2f,
                 Constants.WORLD_HEIGHT - 32f,
                 0f,
