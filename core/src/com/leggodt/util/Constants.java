@@ -22,7 +22,7 @@ public class Constants {
     public static final Vector2 GRAVITY = new Vector2(0f, -2f);
 
     public static final int MUSIC_BPM = 130;
-    public static final float MUSIC_BEAT_TIME = 60f/MUSIC_BPM; //time in seconds between each beat
+    public static final float MUSIC_BEAT_TIME = 60f/MUSIC_BPM; // time in seconds between each beat
     public static final float MUSIC_SECTION_TIME = MUSIC_BEAT_TIME*32;
     public static final float TIMING_MARGIN = 0.25f;
     public static final float TIMING_TARGET_DIAMETER = 200f;
@@ -42,9 +42,4 @@ public class Constants {
         spriteX = new Sprite(new Texture("graphics/spriteX.png")),
 
         spritePlane = new Sprite(new Texture("graphics/simplePlane.png"));
-
-
-    public static final float HEART_WIDTH = 32;
-    public static final float HEART_HEIGHT = HEART_WIDTH/spriteHeart.getWidth()*spriteHeart.getHeight();
-
 }

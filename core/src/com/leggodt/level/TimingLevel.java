@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.leggodt.screen.GameScreen;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
@@ -55,12 +56,10 @@ public class TimingLevel extends Level {
     }
 
     public void handleLoss(){
-        System.out.println("Timing fail");
+        GameScreen.getInstance().addHealth(-2);
     }
 
-    public void handleSuccess(){
-        System.out.println("Timing success");
-    }
+    public void handleSuccess() {}
 
     void handleBeatCreation(){
         int period = 4;

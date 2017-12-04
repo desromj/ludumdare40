@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.leggodt.physics.LavaLamp;
 import com.leggodt.physics.Stand;
+import com.leggodt.screen.GameScreen;
 import com.leggodt.util.Clock;
 import com.leggodt.util.Constants;
 
@@ -74,6 +75,8 @@ public class BalanceLevel extends Level {
                         0
                 )
         );
+
+        handleLoss();
     }
 
 
@@ -88,7 +91,17 @@ public class BalanceLevel extends Level {
 
     @Override
     void handleLoss() {
+        boolean loss = lamp.getX() < -120f || lamp.getX() > Constants.WORLD_WIDTH / 2f + 120f || lamp.getY() < -120f;
 
+        if (loss) {
+            GameScreen.getInstance().addHealth(-6);
+
+            lamp.getBody().setLinearVelocity(stand.getBody().getLinearVelocity());
+            lamp.getBody().setAngularVelocity(0f);
+            lamp.getBody().setTransform((stand.getX() + lamp.getWidth() / 2f) / Constants.PTM,
+                    (stand.getY() + stand.getHeight() + lamp.getHeight() / 2f) / Constants.PTM,
+                    0f);
+        }
     }
 
     @Override
