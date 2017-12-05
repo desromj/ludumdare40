@@ -98,7 +98,7 @@ public class StartScreen extends ScreenAdapter {
         finished = period > 11;
 
         // Allow skipping through the start screen
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             if (period <= 6)
                 startTime = TimeUtils.nanoTime() - (long)(1000000000 * fadeTime * 7);
             else if (period <= 11)

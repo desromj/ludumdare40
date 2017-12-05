@@ -30,7 +30,7 @@ public class DareGame extends Game {
             MusicController.play(MusicController.MENU);
             instance.setScreen(new StartScreen(
                     "LGG_logo.png",
-                    "Lava Lamp Bae",
+                    "Lamp Bae",
                     "By Arne 'S Jegers and Mike Desrochers",
                     0.8f));
         } else if (type == ScoreScreen.class) {

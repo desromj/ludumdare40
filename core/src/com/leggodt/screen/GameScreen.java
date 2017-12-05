@@ -48,6 +48,8 @@ public class GameScreen extends ScreenAdapter implements InputProcessor {
         viewport = new ExtendViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
         spriteBatch = new SpriteBatch();
 
+        LevelController.init();
+
         health = 20;
         startTime = TimeUtils.nanosToMillis(TimeUtils.nanoTime()) / 1000f;
 
