@@ -10,29 +10,37 @@ public class MusicController {
     static Sound musicGame = Gdx.audio.newSound(Gdx.files.internal("sound/musicGame.mp3"));
     static Sound currentlyPlaying;
 
-    MusicController(){}
+    MusicController(){
+        currentlyPlaying = null;
+    }
 
     public static void play(int m){
-        if(currentlyPlaying != null){
-            currentlyPlaying.stop();
-        }
 
-        currentlyPlaying = null;
         switch(m){
             case MENU:
-                currentlyPlaying = musicMenu;
+                if(!(currentlyPlaying == musicMenu)){
+                    if(currentlyPlaying != null) {
+                        currentlyPlaying.stop();
+                    }
+                    currentlyPlaying = musicMenu;
+                    currentlyPlaying.loop();
+                }
                 break;
 
             case GAME:
-                currentlyPlaying = musicGame;
+                if(!(currentlyPlaying == musicGame)){
+                    if(currentlyPlaying != null) {
+                        currentlyPlaying.stop();
+                    }
+                    currentlyPlaying = musicGame;
+                    currentlyPlaying.loop();
+                }
                 break;
         }
 
         if(currentlyPlaying == null){
             Gdx.app.log("MusicController", "Song index not found!");
         }
-
-        currentlyPlaying.loop();
     }
 
     public static void stop(){
